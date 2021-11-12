@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class BoardRepository {
 
     @PersistenceContext

@@ -26,4 +26,5 @@ public class BoardService {
     public void insert(BoardEntity board){
         boardRepository.insertBoard(board);
     }
+
 }

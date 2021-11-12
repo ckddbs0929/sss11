@@ -9,4 +9,6 @@ import shop.sss.service.BoardService;
 public class BoardController {
 
     private final BoardService boardService;
+
+
 }
