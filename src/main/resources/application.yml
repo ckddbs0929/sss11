@@ -4,7 +4,6 @@ spring:
     url: jdbc:mysql://localhost:3306/shop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 123123
-
   mvc:
     hiddenmethod:
       filter:
@@ -13,11 +12,10 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
-    properties:
-      hibernate:
-        show-sql: true
-        format_sql: true
-        ddl-auto: create
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
 
 logging:
   level:
