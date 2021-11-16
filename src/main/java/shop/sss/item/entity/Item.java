@@ -1,8 +1,9 @@
-package shop.sss.entity;
+package shop.sss.item.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import shop.sss.constant.ItemStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

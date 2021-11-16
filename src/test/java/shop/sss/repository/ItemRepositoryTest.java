@@ -1,17 +1,15 @@
 package shop.sss.repository;
 
-import net.minidev.json.JSONUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import shop.sss.entity.Item;
-import shop.sss.entity.ItemStatus;
+import shop.sss.item.entity.Item;
+import shop.sss.constant.ItemStatus;
+import shop.sss.item.repository.ItemRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ItemRepositoryTest {

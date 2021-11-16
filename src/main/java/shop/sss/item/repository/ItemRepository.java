@@ -1,9 +1,9 @@
-package shop.sss.repository;
+package shop.sss.item.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import shop.sss.entity.Item;
+import shop.sss.item.entity.Item;
 
 import java.util.List;
 
