@@ -4,9 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import shop.sss.cart.entity.Cart;
 import shop.sss.constant.Role;
+import shop.sss.order.entity.Orders;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @Entity
@@ -30,6 +34,12 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<>();
+
+    @OneToOne(mappedBy = "member")
+    private Cart cart;
+    
     public static Member createMember(MemberFormDto memberFormDto,
                                       PasswordEncoder passwordEncoder){
         Member member = new Member();

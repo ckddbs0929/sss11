@@ -24,22 +24,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                        .mvcMatchers("/", "/member/**", "/item/**",
+                        .mvcMatchers("/","/member/**","/item/**",
                                 "/images/**").permitAll()
                         .mvcMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated();
 
+        http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+
         // hhtp.formLogin() -> http를 통해 들어오는 form 기반 request를 이용하여 로그인 처리
         http.formLogin()
-                .loginPage("/members/login")
+                .loginPage("/member/login") // 로그인 페이지 커스터마이징
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
-                .failureUrl("/members/login/error")
+                .failureUrl("/member/login/fail")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/");
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");

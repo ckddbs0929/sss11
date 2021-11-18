@@ -3,6 +3,7 @@ package shop.sss.item.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import shop.sss.cart.entity.CartItem;
 import shop.sss.constant.ItemStatus;
 
 import javax.persistence.*;
@@ -37,4 +38,7 @@ public class Item {
 
     private LocalDateTime regTime; // 상품 등록 시간
     private LocalDateTime updateTime; // 상품 수정 시간
+
+    @OneToMany(mappedBy = "item")
+    private CartItem cartItem;
 }
