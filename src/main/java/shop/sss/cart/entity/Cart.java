@@ -3,6 +3,7 @@ package shop.sss.cart.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import shop.sss.constant.BaseEntity;
 import shop.sss.member.entity.Member;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter @Setter
 @ToString
-public class Cart {
+public class Cart extends BaseEntity{
 
     @Id
     @Column(name = "cart_id")

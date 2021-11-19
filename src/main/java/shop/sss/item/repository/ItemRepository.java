@@ -2,12 +2,14 @@ package shop.sss.item.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import shop.sss.item.entity.Item;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long>,
+        QuerydslPredicateExecutor {
 
     List<Item> findByItemNm(String ItemNm);
 

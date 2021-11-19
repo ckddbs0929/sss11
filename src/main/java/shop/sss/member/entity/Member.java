@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import shop.sss.cart.entity.Cart;
+import shop.sss.constant.BaseEntity;
 import shop.sss.constant.Role;
 import shop.sss.order.entity.Orders;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @ToString
 @Table(name = "member")
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @Column(name = "member_id")

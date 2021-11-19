@@ -4,16 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import shop.sss.cart.entity.CartItem;
+import shop.sss.constant.BaseEntity;
 import shop.sss.constant.ItemStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @ToString
 @Entity
 @Table(name = "item")
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,9 +38,6 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemStatus itemStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; // 상품 등록 시간
-    private LocalDateTime updateTime; // 상품 수정 시간
-
     @OneToMany(mappedBy = "item")
-    private CartItem cartItem;
+    private List<CartItem> cartItems;
 }

@@ -2,6 +2,7 @@ package shop.sss.order.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import shop.sss.constant.BaseEntity;
 import shop.sss.item.entity.Item;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,8 +19,6 @@ public class OrderItem {
 
     private int count; // 수량
     private int orderPrice; // 주문가격
-    private LocalDateTime regTime;
-    private LocalDateTime updateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

@@ -2,6 +2,7 @@ package shop.sss.order.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import shop.sss.constant.BaseEntity;
 import shop.sss.constant.OrderStatus;
 import shop.sss.member.entity.Member;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Orders {
+public class Orders extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,9 +22,6 @@ public class Orders {
 
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus; // 주문 상태
-
-    private LocalDateTime regTime;
-    private LocalDateTime orderDate; // 주문일
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

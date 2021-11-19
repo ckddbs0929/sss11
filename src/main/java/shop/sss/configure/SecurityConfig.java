@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .mvcMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated();
 
+        // 권한에 맞지 않은 사용자가 접근할 때 수행되는 핸들러
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
         // hhtp.formLogin() -> http를 통해 들어오는 form 기반 request를 이용하여 로그인 처리
@@ -45,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception{
+        //아래 파일들은 인증 무시
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
     }
 
