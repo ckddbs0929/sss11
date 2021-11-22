@@ -17,6 +17,14 @@ spring:
       format_sql: true
       ddl-auto: update
 
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 100MB
+
+uploadPath: file:/Users/codren/study
+itemImgLocation: /Users/codren/study/item
+
 logging:
   level:
     org:
