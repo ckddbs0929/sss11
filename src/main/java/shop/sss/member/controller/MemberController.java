@@ -25,6 +25,7 @@ public class MemberController {
     @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
+        // MemberFormDto 객체를 회원가입 페이지와 같이 넘겨서 페이지에 넘긴 객체에 정보를 POST로 받아옴
         return "member/memberForm";
     }
 

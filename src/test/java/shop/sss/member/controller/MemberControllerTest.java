@@ -14,7 +14,7 @@ import shop.sss.member.service.MemberService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @Transactional
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -44,7 +44,6 @@ class MemberControllerTest {
         String email = "ssar@nate.com";
         String password = "1234";
         this.create(email, password);
-
 
     }
 }

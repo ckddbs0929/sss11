@@ -22,8 +22,9 @@ spring:
       maxFileSize: 20MB
       maxRequestSize: 100MB
 
-uploadPath: file:/Users/codren/study
-itemImgLocation: /Users/codren/study/item
+itemImgLocation: /Users/osangdev_15/Pictures/item
+
+uploadPath: /Users/osangdev_15/Pictures
 
 logging:
   level:

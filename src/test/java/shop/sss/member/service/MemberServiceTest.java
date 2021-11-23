@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import shop.sss.member.entity.Member;
 import shop.sss.member.entity.MemberFormDto;
+import shop.sss.member.repository.MemberRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +20,8 @@ class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
-
+    @Autowired
+    MemberRepository memberRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
