@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-
+    // yml 에 설정한 uploadPath 프로퍼티
     @Value("${uploadPath}")
     String uploadPath;
 
