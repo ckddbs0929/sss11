@@ -23,17 +23,17 @@ public class Item extends BaseEntity {
     private Long id; // 상품 코드
 
     @Column(nullable = false, length = 50)
-    private String itemNm; // 상품 이름
+    private String itemName; // 상품 이름
+
+    @Lob // 대용량 데이터타입
+    @Column(nullable = false)
+    private String itemDetail; // 상품 상세 설명
 
     @Column(nullable = false)
     private int price; // 상품 가격
 
     @Column(nullable = false)
-    private int stockNumber; // 재고 수량
-
-    @Lob // 대용량 데이터타입
-    @Column(nullable = false)
-    private String itemDetail; // 상품 상세 설명
+    private int stock; // 재고 수량
 
     @Enumerated(EnumType.STRING)
     private ItemStatus itemStatus; // 상품 판매 상태

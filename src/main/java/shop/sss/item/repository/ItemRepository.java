@@ -11,7 +11,7 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long>,
         QuerydslPredicateExecutor {
 
-    List<Item> findByItemNm(String ItemNm);
+    List<Item> findByItemName(String ItemNm);
 
     @Query("select i from Item i where i.itemDetail like %:itemDetail% order by i.price desc")
     List<Item> findByItemDetail(@Param("itemDetail") String itemDetail);

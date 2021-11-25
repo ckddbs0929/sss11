@@ -7,13 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    // yml 에 설정한 uploadPath 프로퍼티
-    @Value("${uploadPath}")
+
+    @Value("${upload}")
     String uploadPath;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/images/**")
                 .addResourceLocations(uploadPath);
+        // /images/** 패턴의 URL은 uploadPath 경로의 폴더를 기준으로 탐색
     }
 }

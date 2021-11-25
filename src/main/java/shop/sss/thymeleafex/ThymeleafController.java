@@ -18,7 +18,7 @@ public class ThymeleafController {
     public String Example01(Model model){
         ItemDto itemDto = new ItemDto();
         itemDto.setItemDetail("제품 상세 설명");
-        itemDto.setItemNm("테스트 상품 22");
+        itemDto.setItemName("테스트 상품 22");
         itemDto.setPrice(1000);
         itemDto.setRegTime(LocalDateTime.now());
 
@@ -32,7 +32,7 @@ public class ThymeleafController {
         for(int i=1; i<=10; i++){
             ItemDto itemDto = new ItemDto();
             itemDto.setItemDetail("제품 설명" + i);
-            itemDto.setItemNm("제품 이름 " + i);
+            itemDto.setItemName("제품 이름 " + i);
             itemDto.setPrice(1000 * i);
             itemDto.setRegTime(LocalDateTime.now());
 

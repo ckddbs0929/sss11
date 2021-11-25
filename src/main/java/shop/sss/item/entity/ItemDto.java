@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class ItemDto {
 
     private Long id;
-    private String itemNm;
+    private String itemName;
     private Integer price; // Integer는 Null 처리가 가능하기 때문에 SQL사용시 편리
     private String itemDetail;
     private String sellStatCd;
