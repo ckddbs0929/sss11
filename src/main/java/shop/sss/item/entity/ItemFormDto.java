@@ -19,7 +19,7 @@ public class ItemFormDto {
     private String itemName;
 
     @NotNull(message = "가격은 필수 입력 값입니다.")
-    private Integer price;
+    private Integer price; //Integer는 Null 처리가 가능하기 때문에 SQL사용시 편리
 
     @NotBlank(message = "상품 상세정보는 필수 입력 값입니다.")
     private String itemDetail;

@@ -43,4 +43,12 @@ public class Item extends BaseEntity {
 
     @OneToMany(mappedBy = "item")
     private List<ItemImg> itemImgs;
+
+    public void updateItem(ItemFormDto itemFormDto){
+        this.itemName = itemFormDto.getItemName();
+        this.price = itemFormDto.getPrice();
+        this.stock = itemFormDto.getStock();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemStatus = itemFormDto.getItemStatus();
+    }
 }

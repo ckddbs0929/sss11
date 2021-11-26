@@ -50,24 +50,27 @@ public class ItemService {
     //상품 수정을 위한 상품 조회메소드
     public ItemFormDto getItemDtl(Long itemId){
 
-        // 상품 id를 기반으로 상품 이미지 엔티티 객체를 호출
+        // 상품 id를 기반으로 상품 이미지 엔티티를 호출
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
 
-        // 상품 이미지 DTO 객체를 담을 객체 생성
+        // 상품 이미지 DTO 를 담을 객체 생성
         List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
+        // 상품 이미지 엔티티를 상품 이미지 DTO 로 변환
         for(ItemImg itemImg : itemImgList){
             ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
             itemImgDtoList.add(itemImgDto);
         }
 
-        // 상품 id를 기반응로 상품 엔티티 객체를 호출
+        // 상품 id를 기반으로 상품 엔티티를 호출
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        // 상품 엔티티 객체를 상품 DTO 객체로 변환
+        // 상품 엔티티를 상품 DTO 로 변환
         ItemFormDto itemFormDto = ItemFormDto.of(item);
         itemFormDto.setItemImgDtoList(itemImgDtoList);
         return itemFormDto;
     }
+
+
 }

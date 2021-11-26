@@ -9,6 +9,7 @@ import org.thymeleaf.util.StringUtils;
 import shop.sss.item.entity.ItemImg;
 import shop.sss.item.repository.ItemImgRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 
 @Service
@@ -39,6 +40,26 @@ public class ItemImgService {
         // 상품 이미지 정보 저장
         itemimg.updateImg(oriImgName, imgName, imgUrl);
         itemImgRepository.save(itemimg);
+    }
+
+    public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception {
+
+        // 상품 이미지를 수정했다면
+        if (itemImgFile.isEmpty()) {
+            ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
+                    .orElseThrow(EntityNotFoundException::new);
+
+            // 기존 이미지 파일이 존재한다면 삭제
+            if (!StringUtils.isEmpty(savedItemImg.getImgName())) {
+                fileService.deleteFile(itemImgLocation + "/" + savedItemImg.getImgName());
+            }
+
+            String oriImgName = itemImgFile.getOriginalFilename();
+            String imgName = fileService.uploadFile(itemImgLocation,
+                    oriImgName, itemImgFile.getBytes());
+            String imgUrl = "/images/item/" + imgName;
+            savedItemImg.updateImg(oriImgName, imgName, imgUrl);
+        }
     }
 }
 
