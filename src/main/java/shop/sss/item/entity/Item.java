@@ -40,4 +40,7 @@ public class Item extends BaseEntity {
 
     @OneToMany(mappedBy = "item")
     private List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "item")
+    private List<ItemImg> itemImgs;
 }
