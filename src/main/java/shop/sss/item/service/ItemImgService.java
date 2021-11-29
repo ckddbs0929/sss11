@@ -42,7 +42,7 @@ public class ItemImgService {
         itemImgRepository.save(itemimg);
     }
 
-    public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception {
+    public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws IOException {
 
         // 상품 이미지를 수정했다면 -> 상품 수정이 안이루어지면 null 이 객체로 넘어옴
         if (!itemImgFile.isEmpty()) {
