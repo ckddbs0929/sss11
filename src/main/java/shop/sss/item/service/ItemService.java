@@ -1,15 +1,15 @@
 package shop.sss.item.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import shop.sss.item.entity.Item;
-import shop.sss.item.entity.ItemFormDto;
-import shop.sss.item.entity.ItemImg;
-import shop.sss.item.entity.ItemImgDto;
+import shop.sss.item.entity.*;
 import shop.sss.item.repository.ItemImgRepository;
 import shop.sss.item.repository.ItemRepository;
+import shop.sss.item.entity.MainItemDto;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -72,5 +72,30 @@ public class ItemService {
         return itemFormDto;
     }
 
+    public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
 
+        // 상품 수정
+        // post 입력값을 이용해 itemId 로 상품을 찾고 그 상품을 수정
+        Item item = itemRepository.findById(itemFormDto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        item.updateItem(itemFormDto);
+
+        // 상품 이미지 수정
+        List<Long> itemImgIds = itemFormDto.getItemImgIds(); // 상품이미지 넣을 리스트 호출
+        for(int i=0; i<itemImgFileList.size(); i++){
+            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
+        }
+        return item.getId();
+    }
+
+    // 사용자 정의 조회문
+    @Transactional(readOnly = true)
+    public Page<Item> getItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 }
