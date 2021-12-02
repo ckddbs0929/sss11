@@ -6,6 +6,7 @@ import lombok.ToString;
 import shop.sss.cart.entity.CartItem;
 import shop.sss.constant.BaseEntity;
 import shop.sss.constant.ItemStatus;
+import shop.sss.exception.OutOfStockException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -50,5 +51,13 @@ public class Item extends BaseEntity {
         this.stock = itemFormDto.getStock();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemStatus = itemFormDto.getItemStatus();
+    }
+
+    public void removeStock(int stock){
+        int restStock = this.stock - stock;
+        if(restStock < 0){
+            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량) " + this.stock + ")");
+        }
+        this.stock = restStock;
     }
 }

@@ -27,4 +27,20 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    // 주문 상품과 주문 수량 정보를 가지고 있는 주문상품 객체 생성
+    public static OrderItem createOrderItem(Item item, int count){
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    public int getTotalPrice(){
+        return orderPrice * count;
+    }
 }

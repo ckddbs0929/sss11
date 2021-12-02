@@ -15,7 +15,7 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create
+      ddl-auto: update
 
   servlet:
     multipart:
@@ -23,8 +23,8 @@ spring:
       max-request-size: 100MB
       enabled: true
 
-upload:
-location:
+upload: file:///Users/user/study/
+location: /Users/user/study/item
 
 logging:
   level:

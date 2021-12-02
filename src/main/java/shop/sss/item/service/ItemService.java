@@ -12,6 +12,7 @@ import shop.sss.item.repository.ItemRepository;
 import shop.sss.item.entity.MainItemDto;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,18 +73,17 @@ public class ItemService {
         return itemFormDto;
     }
 
-    public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
+    public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws IOException {
 
         // 상품 수정
-        // post 입력값을 이용해 itemId 로 상품을 찾고 그 상품을 수정
-        Item item = itemRepository.findById(itemFormDto.getId())
-                .orElseThrow(EntityNotFoundException::new);
+        Item item = itemRepository.findById(itemFormDto.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
 
         // 상품 이미지 수정
-        List<Long> itemImgIds = itemFormDto.getItemImgIds(); // 상품이미지 넣을 리스트 호출
-        for(int i=0; i<itemImgFileList.size(); i++){
+        List<Long> itemImgIds = itemFormDto.getItemImgIds();
+        for (int i = 0; i < itemImgFileList.size(); i++) {
             itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
+
         }
         return item.getId();
     }
