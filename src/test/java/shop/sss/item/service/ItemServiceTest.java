@@ -7,6 +7,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import shop.sss.item.entity.Item;
+import shop.sss.item.entity.ItemFormDto;
 import shop.sss.item.repository.ItemImgRepository;
 import shop.sss.item.repository.ItemRepository;
 
@@ -40,5 +41,14 @@ class ItemServiceTest {
             multipartFiles.add(mockMultipartFile);
         }
         return multipartFiles;
+    }
+
+    @Test
+    void update(){
+        ItemFormDto itemFormDto = new ItemFormDto();
+        itemFormDto.setPrice(100);
+        itemFormDto.setItemDetail("ss");
+
+
     }
 }

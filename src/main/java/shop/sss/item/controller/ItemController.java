@@ -105,7 +105,7 @@ public class ItemController {
     public String itemManage(ItemSearchDto itemSearchDto,
                              @PathVariable("page")Optional<Integer> page, Model model){
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0 , 3);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0 , 10);
         // of 메소드 = pageable 객체 생성
         // isPresent-> 반환값 boolean , 현재 페이지 값이 있으면 get 호출, 없으면 0
         Page<Item> items = itemService.getItemPage(itemSearchDto, pageable);
