@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 import shop.sss.item.entity.Item;
 import shop.sss.item.entity.ItemImg;
 import shop.sss.item.repository.ItemImgRepository;
@@ -68,5 +69,27 @@ public class OrderService {
             orderHistDtos.add(orderHistDto);
         }
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean validateOrder(Long orderId, String email){
+
+        // 주문 취소 요청 유저조회
+        Member member = memberRepository.findByEmail(email);
+
+        // 상품 주문한 유저조회
+        Orders orders = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        Member savedMember = orders.getMember();
+
+        if(!StringUtils.equals(member.getEmail(), savedMember.getEmail())){
+            return false;
+        }
+        return true;
+    }
+
+    // 주문 취소 메소드, 위의 메소드로 검증 후 변경 감지
+    public void cancelOrder(Long orderId){
+        Orders order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        order.cancelOrder();
     }
 }
