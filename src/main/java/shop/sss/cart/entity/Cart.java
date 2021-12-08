@@ -26,4 +26,10 @@ public class Cart extends BaseEntity{
 
     @OneToMany(mappedBy = "cart")
     private List<CartItem> cartItems = new ArrayList<>();
+
+    public static Cart createCart(Member member){
+        Cart cart = new Cart();
+        cart.member = member;
+        return cart;
+    }
 }
