@@ -3,6 +3,7 @@ package shop.sss.cart.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 import shop.sss.cart.entity.Cart;
 import shop.sss.cart.entity.CartListDto;
 import shop.sss.cart.entity.CartItem;
@@ -68,5 +69,26 @@ public class CartService {
 
         cartListDtos = cartItemRepository.findCartListDto(cart.getId());
         return cartListDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public boolean validateCartItem(Long cartItemId, String email){
+
+        // 현재 로그인한 유저
+        Member member = memberRepository.findByEmail(email);
+
+        // 수량 변경 요청이 들어온 장바구니 상품의 유저
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+        Member savedMember = cartItem.getCart().getMember();
+
+        if(!StringUtils.equals(member.getEmail(), savedMember.getEmail())){
+            return false;
+        }
+        return true;
+    }
+
+    public void updateCartItemCount(int count, Long cartItemId){
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
+        cartItem.updateCount(count);
     }
 }
