@@ -4,16 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
-import shop.sss.cart.entity.Cart;
-import shop.sss.cart.entity.CartListDto;
-import shop.sss.cart.entity.CartItem;
-import shop.sss.cart.entity.CartItemDto;
+import shop.sss.cart.entity.*;
 import shop.sss.cart.repository.CartItemRepository;
 import shop.sss.cart.repository.CartRepository;
 import shop.sss.item.entity.Item;
 import shop.sss.item.repository.ItemRepository;
 import shop.sss.member.entity.Member;
 import shop.sss.member.repository.MemberRepository;
+import shop.sss.order.entity.OrderDto;
+import shop.sss.order.service.OrderService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
+    private final OrderService orderService;
 
     public Long addCart(CartItemDto cartItemDto, String email){
 
@@ -95,5 +95,26 @@ public class CartService {
     public void deleteCartItem(Long cartItemId){
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
         cartItemRepository.delete(cartItem);
+    }
+
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email){
+
+        List<OrderDto> orderDtoList = new ArrayList<>();
+
+        for(CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem = cartItemRepository.findById(cartOrderDto.getCartItemid()).orElseThrow(EntityNotFoundException::new);
+            OrderDto orderDto = new OrderDto();
+            orderDto.setItemId(cartItem.getItem().getId());
+            orderDto.setCount(cartItem.getCount());
+            orderDtoList.add(orderDto);
+        }
+
+        Long orderId = orderService.orders(orderDtoList, email);
+
+        for(CartOrderDto cartOrderDto : cartOrderDtoList){
+            CartItem cartItem = cartItemRepository.findById(cartOrderDto.getCartItemid()).orElseThrow(EntityNotFoundException::new);
+            cartItemRepository.delete(cartItem);
+        }
+        return orderId;
     }
 }
